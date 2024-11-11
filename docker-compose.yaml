@@ -7,7 +7,8 @@ services:
     ports:
       - "3000:3000" # Expose port 80 on the host
     environment:
-      - NEXTAUTH_SECRET='Ey7nTKnggBc0bRN8WUjyShw2qzOZ6KW4fUyqcKBePxY='
-      - NEXTAUTH_URL='http://localhost:3000'
+      - NEXTAUTH_SECRET=Ey7nTKnggBc0bRN8WUjyShw2qzOZ6KW4fUyqcKBePxY=
+      - NEXTAUTH_URL=http://localhost:3000
       - NEXT_PUBLIC_BACKEND_URL_AUTH=http://localhost:80
-      - NEXT_PUBLIC_BACKEND_UR_CAMP=http://localhost:81
+      - NEXT_PUBLIC_BACKEND_URL_CAMP=http://localhost:81
+      ## it not work when using localhost in the container
