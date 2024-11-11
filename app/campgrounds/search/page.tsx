@@ -7,6 +7,7 @@ import Userme from "@/app/api/auth/userme";
 import SettingsDropdown from "@/components/settingdropdown";
 import { Tent } from "lucide-react";
 import { CampgroundDetails } from "@/interfaces/campground";
+import { redirect } from "next/navigation";
 
 export interface User {
   token: string | null;
@@ -15,6 +16,10 @@ export interface User {
 export default async function SearchPage() {
   const session = await getServerSession(authOptions);
   const token = (session?.user as User)?.token ?? null;
+
+  if (!token) {
+    redirect("/login");
+  }
 
   let isAdmin = false;
   if (token) {
