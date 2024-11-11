@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: tenkr/sds-frontend:lastest
+    container_name: sds-frontend
+    ports:
+      - "3000:3000" # Expose port 80 on the host
+    environment:
+      - NEXTAUTH_SECRET='Ey7nTKnggBc0bRN8WUjyShw2qzOZ6KW4fUyqcKBePxY='
+      - NEXTAUTH_URL='http://localhost:3000'
+      - NEXT_PUBLIC_BACKEND_URL_AUTH=http://localhost:80
+      - NEXT_PUBLIC_BACKEND_UR_CAMP=http://localhost:81

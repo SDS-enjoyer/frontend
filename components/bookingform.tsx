@@ -130,7 +130,7 @@ export function BookingandCheckoutForm({
       if (onSuccess) {
         onSuccess();
       } else {
-        router.push(`/bookings/dashboard`);
+        router.push(`/`);
       }
     } catch (error) {
       console.error(error);

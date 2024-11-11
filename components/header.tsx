@@ -8,7 +8,7 @@ import { signOut, useSession } from "next-auth/react";
 
 const navigation = [
   { name: "Search Camps", href: "/campgrounds/search" },
-  { name: "Booking", href: "/bookings/dashboard" },
+  // { name: "Booking", href: "/bookings/dashboard" },
   { name: "Profile", href: "/profile" },
 ];
 
