@@ -92,3 +92,11 @@ git checkout -b feature-branch
 ## License
 
 (Specify the license under which your project is released)
+
+### Deploy ment front
+
+```sh
+docker build -t tenkr/sds-frontend:lastest .
+docker login
+docker push tenkr/sds-frontend:lastest
+```
