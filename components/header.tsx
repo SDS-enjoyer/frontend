@@ -10,6 +10,7 @@ const navigation = [
   { name: "Search Camps", href: "/campgrounds/search" },
   // { name: "Booking", href: "/bookings/dashboard" },
   { name: "Profile", href: "/profile" },
+  { name: "Chat with us", href: "/chatbot" },
 ];
 
 export default function Header() {
