@@ -2,7 +2,7 @@
 
 import { Booking, BookingFormData } from "@/interfaces/booking";
 
-const API_BASE_URL = `${process.env.NEXT_PUBLIC_BACKEND_UR_CAMP}/api/v1`;
+const API_BASE_URL = `${process.env.NEXT_PUBLIC_BACKEND_URL_CAMP}/api/v1`;
 
 // Reuse the getToken function from campgrounds API
 async function getToken(token?: string) {
