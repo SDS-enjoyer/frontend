@@ -8,36 +8,25 @@ export interface ChatMessage {
   isBot: boolean;
   timestamp: Date;
 }
-async function getToken(token?: string) {
-  if (token) {
-    return token;
-  }
-  const response = await fetch("/api/token");
-  if (!response.ok) {
-    throw new Error("Failed to fetch token");
-  }
-  const data = await response.json();
 
-  console.log("data is", data);
-  console.log("data.token is", data.token);
-  return data.token;
-}
-
-export const sendMessage = async (text: string): Promise<string> => {
+export const sendMessage = async (
+  text: string,
+  token: string
+): Promise<string> => {
   try {
-    const token = await getToken();
     const response = await axios.post(
       `${API_URL}/chatbot`,
       { text },
       {
         headers: {
-          "Content-Type": "application/json",
-          accept: "application/json",
           Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
       }
     );
-    return response.data;
+    // Assuming the API returns { response: "message text" }
+    // Extract the actual message text from the response
+    return response.data.response || "No response from bot";
   } catch (error) {
     console.error("Error sending message:", error);
     throw error;
