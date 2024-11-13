@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import Image from "next/image";
 import Link from "next/link";
-import { signOut, useSession } from "next-auth/react";
 
 const navigation = [
   { name: "Search Camps", href: "/campgrounds/search" },
@@ -15,7 +14,6 @@ const navigation = [
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { data: session } = useSession();
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 bg-white shadow">
@@ -64,25 +62,6 @@ export default function Header() {
             </Link>
           ))}
         </div>
-
-        {/* Auth Buttons */}
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          {session ? (
-            <button
-              onClick={() => signOut({ callbackUrl: "/" })}
-              className="text-sm font-semibold leading-6 text-gray-900"
-            >
-              Sign out
-            </button>
-          ) : (
-            <Link
-              href="/login"
-              className="text-sm font-semibold leading-6 text-gray-900"
-            >
-              Log in <span aria-hidden="true">&rarr;</span>
-            </Link>
-          )}
-        </div>
       </nav>
 
       {/* Mobile Menu Dialog */}
@@ -129,23 +108,6 @@ export default function Header() {
                     {item.name}
                   </Link>
                 ))}
-              </div>
-              <div className="py-6">
-                {session ? (
-                  <button
-                    onClick={() => signOut({ callbackUrl: "/" })}
-                    className="block w-full px-3 py-2.5 text-base font-semibold text-gray-900 hover:bg-gray-50 text-start"
-                  >
-                    Sign out
-                  </button>
-                ) : (
-                  <Link
-                    href="/login"
-                    className="block w-full px-3 py-2.5 text-base font-semibold text-gray-900 hover:bg-gray-50 text-start"
-                  >
-                    Log in
-                  </Link>
-                )}
               </div>
             </div>
           </div>

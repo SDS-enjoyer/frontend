@@ -1,32 +1,15 @@
 import { fetchCampgrounds } from "@/app/api/campground/api";
 import Image from "next/image";
 import Link from "next/link";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
-import Userme from "@/app/api/auth/userme";
-import SettingsDropdown from "@/components/settingdropdown";
+
 import { Tent } from "lucide-react";
 import { CampgroundDetails } from "@/interfaces/campground";
-import { redirect } from "next/navigation";
 
 export interface User {
   token: string | null;
 }
 
 export default async function SearchPage() {
-  const session = await getServerSession(authOptions);
-  const token = (session?.user as User)?.token ?? null;
-
-  if (!token) {
-    redirect("/login");
-  }
-
-  let isAdmin = false;
-  if (token) {
-    const user = await Userme(token);
-    isAdmin = user?.data?.role === "admin";
-  }
-
   let campgrounds: CampgroundDetails[];
   let error: string | null = null;
 
@@ -76,14 +59,6 @@ export default async function SearchPage() {
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
             Ours Campgrounds
           </h2>
-          {isAdmin && (
-            <div className="flex flex-row items-center justify-center gap-1 sm:gap-3 md:gap-5">
-              <span className="text-xs md:text-sm lg:text-base text-blue-600 bg-blue-50 px-2 md:px-3 py-1 rounded-full transition-all">
-                Admin
-              </span>
-              <SettingsDropdown />
-            </div>
-          )}
         </div>
         {campgrounds.length === 0 ? (
           <div className="min-h-[50vh] flex flex-col items-center justify-center text-center px-4">

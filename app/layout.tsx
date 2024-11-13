@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 // import SidebarDemo from "@/components/navbar";
-import { getServerSession } from "next-auth";
 
-import NextAuthProvider from "./providers/NextAuthProvider";
 import { Toaster } from "@/components/ui/toaster";
-import { authOptions } from "./api/auth/[...nextauth]/authOptions";
 
 export const metadata: Metadata = {
   title: "CampGround - Discover Your Perfect Campsite", // Custom title
@@ -21,14 +18,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const nextAuthSession = await getServerSession(authOptions);
   return (
     <html lang="en">
       <body>
         <div className=" h-screen flex flex-col">
-          <NextAuthProvider session={nextAuthSession}>
-            {children}
-          </NextAuthProvider>
+          {children}
+
           <Toaster />
         </div>
       </body>

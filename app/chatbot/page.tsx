@@ -8,9 +8,6 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Send, Loader2 } from "lucide-react";
 import { sendMessage, ChatMessage } from "@/app/api/chatbot/api";
-import { getSession } from "next-auth/react";
-import Userme from "../api/auth/userme";
-import { User } from "../campgrounds/search/page";
 
 const ChatbotPage = () => {
   const router = useRouter();
@@ -26,30 +23,6 @@ const ChatbotPage = () => {
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
-
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const session = await getSession();
-        const userToken = (session?.user as User)?.token ?? null;
-
-        if (!userToken) {
-          router.push("/login");
-          return;
-        }
-
-        setToken(userToken);
-        const user = await Userme(userToken);
-        setProfile(user?.data);
-        setIsLoading(false);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "Something went wrong");
-        setIsLoading(false);
-      }
-    };
-
-    fetchProfile();
-  }, [router]);
 
   useEffect(() => {
     scrollToBottom();
