@@ -8,7 +8,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { BookingandCheckoutForm } from "@/components/bookingform";
+
 import { fetchCampgroundData } from "@/app/api/campground/api";
 const CampgroundPage = async ({
   params,
@@ -59,31 +59,13 @@ const CampgroundPage = async ({
                 </dd>
               </div>
             ))}
-            <div>
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button>Open Booking</Button>
-                </DialogTrigger>
-                <DialogContent className=" w-full">
-                  <DialogHeader>
-                    <DialogTitle className=" text-start mb-2">
-                      Booking Form
-                    </DialogTitle>
-                    <DialogDescription className=" text-start">
-                      Complete your booking details below.
-                    </DialogDescription>
-                  </DialogHeader>
-                  <BookingandCheckoutForm campgroundId={campgroundId} />
-                </DialogContent>
-              </Dialog>
-            </div>
           </dl>
         </div>
 
         <div>
           <img
             alt={`Campground ${campgroundData.name}`}
-            src={campgroundData.picture}
+            src="/img/campground-hero-2.jpg"
             className="rounded-lg bg-gray-100"
           />
         </div>

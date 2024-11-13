@@ -9,17 +9,13 @@ export interface ChatMessage {
   timestamp: Date;
 }
 
-export const sendMessage = async (
-  text: string,
-  token: string
-): Promise<string> => {
+export const sendMessage = async (text: string): Promise<string> => {
   try {
     const response = await axios.post(
       `${API_URL}/chatbot`,
       { text },
       {
         headers: {
-          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       }

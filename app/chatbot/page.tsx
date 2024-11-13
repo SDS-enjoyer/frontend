@@ -10,14 +10,11 @@ import { Send, Loader2 } from "lucide-react";
 import { sendMessage, ChatMessage } from "@/app/api/chatbot/api";
 
 const ChatbotPage = () => {
-  const router = useRouter();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputText, setInputText] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
+
   const [isSending, setIsSending] = useState(false);
-  const [profile, setProfile] = useState<any>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [token, setToken] = useState<string | null>(null);
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -30,7 +27,6 @@ const ChatbotPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!inputText.trim() || isSending || !token) return;
 
     const userMessage: ChatMessage = {
       text: inputText,
@@ -43,7 +39,7 @@ const ChatbotPage = () => {
     setIsSending(true);
 
     try {
-      const responseText = await sendMessage(inputText, token);
+      const responseText = await sendMessage(inputText);
       const botMessage: ChatMessage = {
         text: responseText, // Using the extracted text from the response
         isBot: true,
@@ -61,25 +57,6 @@ const ChatbotPage = () => {
       setIsSending(false);
     }
   };
-
-  if (isLoading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="flex items-center gap-2">
-          <Loader2 className="h-6 w-6 animate-spin" />
-          <span>Loading...</span>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="text-red-500">{error}</div>
-      </div>
-    );
-  }
 
   return (
     <div className="flex min-h-screen  p-4">
